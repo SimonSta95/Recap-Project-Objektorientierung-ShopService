@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,5 +49,19 @@ class ShopServiceTest {
         //THEN
         assertEquals(1, actual.size());
 
+    }
+
+    @Test
+    void testOrderUpdate() {
+        //GIVEN
+        ShopService shopService = new ShopService();
+        List<String> productsIds = List.of("1");
+        Order order = shopService.addOrder(productsIds);
+
+        //WHEN
+        Order actual = shopService.updateOrder(order.id());
+
+        //THEN
+        assertEquals(OrderStatus.IN_DELIVERY, actual.orderStatus());
     }
 }

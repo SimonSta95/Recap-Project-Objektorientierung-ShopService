@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
@@ -34,4 +33,19 @@ public class ShopService {
         return orders.stream().filter(o -> o.orderStatus().equals(status))
                               .toList();
     }
+
+    public Order updateOrder(String orderId) {
+        Order order = orderRepo.getOrderById(orderId);
+        if (order != null) {
+            if (order.orderStatus().equals(OrderStatus.PROCESSING)) {
+                return order.withOrderStatus(OrderStatus.IN_DELIVERY);
+            }
+            if (order.orderStatus().equals(OrderStatus.IN_DELIVERY)) {
+                return order.withOrderStatus(OrderStatus.COMPLETED);
+            }
+        }
+
+        return order;
+    }
+
 }
