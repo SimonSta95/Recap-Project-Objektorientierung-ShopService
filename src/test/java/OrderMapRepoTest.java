@@ -59,7 +59,7 @@ class OrderMapRepoTest {
 
         //THEN
         Product product1 = new Product("1", "Apfel");
-        Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING, ZonedDateTime.now());
+        Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING, newOrder.orderDate());
         assertEquals(actual, expected);
         assertEquals(repo.getOrderById("1"), expected);
     }
