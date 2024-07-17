@@ -43,7 +43,7 @@ class ProductRepoTest {
         //THEN
         Product expected = new Product("2", "Banane");
         assertEquals(actual, expected);
-        assertEquals(repo.getProductById("2"), expected);
+        assertEquals(repo.getProductById("2").get(), expected);
     }
 
     @org.junit.jupiter.api.Test
@@ -54,7 +54,8 @@ class ProductRepoTest {
         //WHEN
         repo.removeProduct("1");
 
+
         //THEN
-        assertNull(repo.getProductById("1"));
+        assertTrue(repo.getProductById("1").isEmpty());
     }
 }
