@@ -11,7 +11,9 @@ class ShopServiceTest {
     @Test
     void addOrderTest() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ProductRepo shopRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderListRepo();
+        ShopService shopService = new ShopService(shopRepo,orderRepo);
         List<String> productsIds = List.of("1");
 
         //WHEN
@@ -26,7 +28,9 @@ class ShopServiceTest {
     @Test
     void addOrderTest_whenInvalidProductId_throwError() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ProductRepo shopRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderListRepo();
+        ShopService shopService = new ShopService(shopRepo,orderRepo);
         List<String> productsIds = List.of("1", "2", "3");
 
         //WHEN
@@ -39,7 +43,9 @@ class ShopServiceTest {
     @Test
     void testGetOrdersByStatus() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ProductRepo shopRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderListRepo();
+        ShopService shopService = new ShopService(shopRepo,orderRepo);
         List<String> productsIds = List.of("1");
 
         shopService.addOrder(productsIds);
@@ -55,7 +61,9 @@ class ShopServiceTest {
     @Test
     void testOrderUpdate() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ProductRepo shopRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderListRepo();
+        ShopService shopService = new ShopService(shopRepo,orderRepo);
         List<String> productsIds = List.of("1");
         Order order = shopService.addOrder(productsIds);
 
